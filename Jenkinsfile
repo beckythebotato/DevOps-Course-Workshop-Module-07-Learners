@@ -1,11 +1,21 @@
 pipeline {
-    agent {
-        docker { image 'node:16.13.1-alpine' }
-    }
+    agent any
+
     stages {
-        stage('Test') {
+        stage('Build Dotnet') {
+            steps {
+                echo 'Building..'
+                dotnet build
+            }
+        }
+        stage('Test Dotnet') {
             steps {
                 sh 'node --version'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
             }
         }
     }
